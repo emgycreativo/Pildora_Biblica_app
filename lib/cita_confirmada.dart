@@ -13,7 +13,7 @@ class CitaConfirmada extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFAF6EF),
+      backgroundColor: Colors.yellow,
       body: SafeArea(
         child: TweenAnimationBuilder<double>(
           tween: Tween(begin: 0, end: 1),
