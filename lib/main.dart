@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'app_theme.dart';
+import 'cita_confirmada.dart';
+import 'custom_button.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Píldora Bíblica',
       debugShowCheckedModeBanner: false,
+      theme: buildAppTheme(),
       home: const PantallaBienvenida(),
     );
   }
@@ -38,31 +42,6 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
     );
   }
 
-  Widget _buildActionButton(String text, {Color textColor = Colors.yellow}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 32.0),
-      child: SizedBox(
-        width: double.infinity,
-        child: ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.black,
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
-            ),
-          ),
-          child: Text(
-            text,
-            style: TextStyle(
-              color: textColor,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 
   Widget _buildBienvenidaView() {
     return Column(
@@ -120,25 +99,10 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
         // Botón "Comparte la cita"
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),
-          child: SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: _shareQuote,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              ),
-              child: const Text(
-                'COMPARTE LA CITA',
-                style: TextStyle(
-                  color: Colors.yellow,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+          child: AppButton(
+            text: 'COMPARTE LA CITA',
+            onPressed: _shareQuote,
+            icon: Icons.share,
           ),
         ),
 
@@ -162,62 +126,6 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
     );
   }
 
-  Widget _buildDevocionalView() {
-    final fecha = DateFormat('dd MMM yyyy', 'es_ES').format(DateTime.now()).toUpperCase();
-    return Container(
-      key: const ValueKey('devocional'),
-      color: Colors.yellow,
-      width: double.infinity,
-      child: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          children: [
-            const Spacer(flex: 2),
-            CircleAvatar(
-              radius: 40,
-              backgroundColor: Colors.green.shade100,
-              child: Icon(Icons.check, size: 50, color: Colors.green.shade700),
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              '¡Cita marcada como leída!',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              fecha,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade700,
-                letterSpacing: 1.1,
-              ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'LAMENTACIONES 3:25',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-                letterSpacing: 1.2,
-              ),
-            ),
-            const Spacer(flex: 2),
-            _buildActionButton('Leer Devocional', textColor: Colors.white),
-            const SizedBox(height: 16),
-            _buildActionButton('Canción del día', textColor: Colors.white),
-            const SizedBox(height: 16),
-            _buildActionButton('Diario de oración', textColor: Colors.white),
-            const Spacer(flex: 3),
-          ],
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -239,7 +147,7 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
                 );
               },
               child: _mostrarDevocional
-                  ? _buildDevocionalView()
+                  ? const CitaConfirmada()
                   : _buildBienvenidaView(),
             ),
           ),
