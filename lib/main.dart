@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,8 +17,21 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class PantallaBienvenida extends StatelessWidget {
+class PantallaBienvenida extends StatefulWidget {
   const PantallaBienvenida({super.key});
+
+  @override
+  State<PantallaBienvenida> createState() => _PantallaBienvenidaState();
+}
+
+class _PantallaBienvenidaState extends State<PantallaBienvenida> {
+  bool _isFavorite = false;
+
+  void _shareQuote() {
+    Share.share(
+      '"Bueno es el Señor con quienes esperan en él, con todos los que lo buscan."\nLAMENTACIONES 3:25',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +77,17 @@ class PantallaBienvenida extends StatelessWidget {
                 const SizedBox(height: 16),
 
                 // Icono de corazón
-                const Icon(
-                  Icons.favorite_border,
-                  color: Colors.white,
-                  size: 30,
+                IconButton(
+                  icon: Icon(
+                    _isFavorite ? Icons.favorite : Icons.favorite_border,
+                    color: _isFavorite ? Colors.red : Colors.white,
+                  ),
+                  iconSize: 30,
+                  onPressed: () {
+                    setState(() {
+                      _isFavorite = !_isFavorite;
+                    });
+                  },
                 ),
 
                 const Spacer(),
@@ -77,9 +98,9 @@ class PantallaBienvenida extends StatelessWidget {
                   child: SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: _shareQuote,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
+                        backgroundColor: Colors.yellow,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
@@ -87,7 +108,10 @@ class PantallaBienvenida extends StatelessWidget {
                       ),
                       child: const Text(
                         'COMPARTE LA CITA',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
