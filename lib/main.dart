@@ -47,7 +47,7 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
                 const Spacer(flex: 2),
 
                 // Logo
-                Image.asset('assets/logo_pildora.png', width: 80),
+                Image.asset('assets/logo_pildora.png', width: 100),
                 const SizedBox(height: 16),
 
                 // Texto de la cita
@@ -100,7 +100,7 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
                     child: ElevatedButton(
                       onPressed: _shareQuote,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.yellow,
+                        backgroundColor: Colors.black,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
@@ -109,7 +109,7 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
                       child: const Text(
                         'COMPARTE LA CITA',
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.yellow,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
