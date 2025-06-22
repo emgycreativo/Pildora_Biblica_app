@@ -38,7 +38,7 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
     );
   }
 
-  Widget _buildActionButton(String text) {
+  Widget _buildActionButton(String text, {Color textColor = Colors.yellow}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32.0),
       child: SizedBox(
@@ -54,8 +54,8 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
           ),
           child: Text(
             text,
-            style: const TextStyle(
-              color: Colors.yellow,
+            style: TextStyle(
+              color: textColor,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -164,46 +164,58 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
 
   Widget _buildDevocionalView() {
     final fecha = DateFormat('dd MMM yyyy', 'es_ES').format(DateTime.now()).toUpperCase();
-    return Column(
+    return Container(
       key: const ValueKey('devocional'),
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Spacer(flex: 2),
-        const Icon(Icons.check_circle, color: Colors.white, size: 80),
-        const SizedBox(height: 16),
-        const Text(
-          '¡Cita marcada como leída!',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
+      color: const Color(0xFFFAF6EF),
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          children: [
+            const Spacer(flex: 2),
+            CircleAvatar(
+              radius: 40,
+              backgroundColor: Colors.green.shade100,
+              child: Icon(Icons.check, size: 50, color: Colors.green.shade700),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              '¡Cita marcada como leída!',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              fecha,
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey.shade700,
+                letterSpacing: 1.1,
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'LAMENTACIONES 3:25',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                letterSpacing: 1.2,
+              ),
+            ),
+            const Spacer(flex: 2),
+            _buildActionButton('LEER DEVOCIONAL', textColor: Colors.white),
+            const SizedBox(height: 16),
+            _buildActionButton('Canción del día', textColor: Colors.white),
+            const SizedBox(height: 16),
+            _buildActionButton('Diario de oración', textColor: Colors.white),
+            const Spacer(flex: 3),
+          ],
         ),
-        const SizedBox(height: 32),
-        Text(
-          fecha,
-          style: const TextStyle(
-            color: Colors.white70,
-            fontSize: 16,
-          ),
-        ),
-        const SizedBox(height: 8),
-        const Text(
-          'LAMENTACIONES 3:25',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-          ),
-        ),
-        const Spacer(),
-        _buildActionButton('LEER DEVOCIONAL'),
-        const SizedBox(height: 12),
-        _buildActionButton('Canción del día'),
-        const SizedBox(height: 12),
-        _buildActionButton('Diario de oración'),
-        const SizedBox(height: 24),
-      ],
+      ),
     );
   }
 
