@@ -74,7 +74,7 @@ class CitaConfirmada extends StatelessWidget {
                   ),
                 ),
                 const Spacer(flex: 2),
-                const _BotonAccion(texto: 'LEER DEVOCIONAL'),
+                const _BotonAccion(texto: 'Leer Devocional'),
                 const SizedBox(height: 16),
                 const _BotonAccion(texto: 'Canción del día'),
                 const SizedBox(height: 16),

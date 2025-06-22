@@ -166,7 +166,7 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
     final fecha = DateFormat('dd MMM yyyy', 'es_ES').format(DateTime.now()).toUpperCase();
     return Container(
       key: const ValueKey('devocional'),
-      color: const Color(0xFFFAF6EF),
+      color: Colors.yellow,
       width: double.infinity,
       child: Padding(
         padding: const EdgeInsets.all(24.0),
@@ -207,7 +207,7 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
               ),
             ),
             const Spacer(flex: 2),
-            _buildActionButton('LEER DEVOCIONAL', textColor: Colors.white),
+            _buildActionButton('Leer Devocional', textColor: Colors.white),
             const SizedBox(height: 16),
             _buildActionButton('Canción del día', textColor: Colors.white),
             const SizedBox(height: 16),
