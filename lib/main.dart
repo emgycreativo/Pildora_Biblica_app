@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 import 'package:share_plus/share_plus.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -35,11 +36,39 @@ class PantallaBienvenida extends StatefulWidget {
 class _PantallaBienvenidaState extends State<PantallaBienvenida> {
   bool _isFavorite = false;
   bool _mostrarDevocional = false;
+  late final String _background;
+  late final Map<String, String> _versiculo;
+
+  @override
+  void initState() {
+    super.initState();
+    final random = Random();
+    final fondos = [
+      'assets/fondo1_pb_t1.jpg',
+      'assets/fondo2_pb_t1.jpg',
+      'assets/fondo3_pb_t1.jpg',
+    ];
+    final versiculos = [
+      {
+        'texto':
+            'Porque yo sé los planes que tengo para ustedes —afirma el Señor—, planes de bienestar y no de calamidad, a fin de darles un futuro y una esperanza.',
+        'cita': 'JEREMÍAS 29:11',
+      },
+      {
+        'texto': 'El Señor es mi pastor, nada me faltará.',
+        'cita': 'SALMOS 23:1',
+      },
+      {
+        'texto': 'Todo lo puedo en Cristo que me fortalece.',
+        'cita': 'FILIPENSES 4:13',
+      },
+    ];
+    _background = fondos[random.nextInt(fondos.length)];
+    _versiculo = versiculos[random.nextInt(versiculos.length)];
+  }
 
   void _shareQuote() {
-    Share.share(
-      '"Bueno es el Señor con quienes esperan en él, con todos los que lo buscan."\nLAMENTACIONES 3:25',
-    );
+    Share.share('"${_versiculo['texto']}"\n${_versiculo['cita']}');
   }
 
 
@@ -55,12 +84,12 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
         const SizedBox(height: 16),
 
         // Texto de la cita
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 32.0),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32.0),
           child: Text(
-            'Bueno es el Señor con quienes esperan en él, con todos los que lo buscan.',
+            _versiculo['texto']!,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 20,
               height: 1.5,
@@ -70,9 +99,9 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
         const SizedBox(height: 16),
 
         // Cita
-        const Text(
-          'LAMENTACIONES 3:25',
-          style: TextStyle(
+        Text(
+          _versiculo['cita']!,
+          style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
@@ -133,7 +162,7 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset('assets/fondo_amanecer.png', fit: BoxFit.cover),
+          Image.asset(_background, fit: BoxFit.cover),
           SafeArea(
             child: AnimatedSwitcher(
               duration: const Duration(milliseconds: 500),
