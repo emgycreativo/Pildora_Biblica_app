@@ -15,7 +15,6 @@ class _CitaConfirmadaState extends State<CitaConfirmada> {
   @override
   Widget build(BuildContext context) {
     final fecha = DateFormat('dd MMM yyyy', 'es_ES').format(DateTime.now()).toUpperCase();
-    final hora = DateFormat('HH:mm').format(DateTime.now());
 
     Widget quickAction(IconData icon, String label, String duration) {
       return Expanded(
@@ -81,11 +80,10 @@ class _CitaConfirmadaState extends State<CitaConfirmada> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
               child: Row(
                 children: [
-                  Text(hora, style: const TextStyle(fontWeight: FontWeight.bold)),
-                  const Spacer(),
+                  const CircleAvatar(radius: 18, child: Icon(Icons.person)),
+                  const SizedBox(width: 12),
                   const Text('Acércate a Dios', style: TextStyle(fontWeight: FontWeight.bold)),
                   const Spacer(),
-                  const CircleAvatar(radius: 18, child: Icon(Icons.person)),
                   IconButton(
                     onPressed: () {},
                     icon: const Icon(Icons.group),
@@ -111,7 +109,7 @@ class _CitaConfirmadaState extends State<CitaConfirmada> {
                           Text(fecha, style: TextStyle(color: Colors.grey.shade600)),
                           const SizedBox(height: 8),
                           const Text(
-                            'Moisés, el que venció sus temores',
+                            'Devocional de ejemplo (Filipenses 4:13)',
                             style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                           ),
                           const SizedBox(height: 8),
@@ -126,11 +124,24 @@ class _CitaConfirmadaState extends State<CitaConfirmada> {
                           const Text('LA CITA DE HOY ES DE:', style: TextStyle(color: Colors.grey, fontSize: 12)),
                           const SizedBox(height: 4),
                           const Text(
-                            'Lamentaciones 3:25',
+                            'Filipenses 4:13',
                             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                           ),
                           const SizedBox(height: 12),
                           AppButton(text: 'LEER', onPressed: () {}),
+                          const SizedBox(height: 12),
+                          ExpansionTile(
+                            tilePadding: EdgeInsets.zero,
+                            title: Text('Devocional: Fortaleza en Cristo', style: TextStyle(color: Colors.black)),
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'A veces sentimos que nuestras fuerzas no son suficientes para los desafíos del día. Las preocupaciones, los problemas o nuestras propias limitaciones nos hacen dudar.\n\nPero este versículo nos recuerda que nuestra verdadera fortaleza viene de Cristo. No se trata solo de aguantar, sino de avanzar con fe sabiendo que Él nos da poder más allá de nuestras capacidades. Hoy, respira profundo, y dile a Dios: "Contigo, puedo hacerlo".',
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
