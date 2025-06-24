@@ -13,35 +13,35 @@ class EventoPuntos {
   });
 }
 
+final List<EventoPuntos> eventosPuntosGlobal = [
+  EventoPuntos(
+    descripcion: 'Entrada diaria',
+    puntos: 10,
+    fecha: DateTime(2025, 6, 23),
+  ),
+  EventoPuntos(
+    descripcion: 'Compartió la app',
+    puntos: 20,
+    fecha: DateTime(2025, 6, 22),
+  ),
+  EventoPuntos(
+    descripcion: 'Leyó el devocional',
+    puntos: 15,
+    fecha: DateTime(2025, 6, 21),
+  ),
+];
+
 class HistorialPuntosScreen extends StatelessWidget {
   HistorialPuntosScreen({super.key});
-
-  final List<EventoPuntos> _eventos = [
-    EventoPuntos(
-      descripcion: 'Entrada diaria',
-      puntos: 10,
-      fecha: DateTime(2025, 6, 23),
-    ),
-    EventoPuntos(
-      descripcion: 'Compartió la app',
-      puntos: 20,
-      fecha: DateTime(2025, 6, 22),
-    ),
-    EventoPuntos(
-      descripcion: 'Leyó el devocional',
-      puntos: 15,
-      fecha: DateTime(2025, 6, 21),
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Historial de Puntos')),
       body: ListView.builder(
-        itemCount: _eventos.length,
+        itemCount: eventosPuntosGlobal.length,
         itemBuilder: (context, index) {
-          final evento = _eventos[index];
+          final evento = eventosPuntosGlobal[index];
           final fecha = DateFormat('dd MMM yyyy', 'es_ES')
               .format(evento.fecha)
               .toUpperCase();
