@@ -107,7 +107,7 @@ class _CitaConfirmadaState extends State<CitaConfirmada> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (_) => const HistorialPuntosScreen(),
+                          builder: (_) => HistorialPuntosScreen(),
                         ),
                       );
                     },
@@ -121,8 +121,9 @@ class _CitaConfirmadaState extends State<CitaConfirmada> {
                             const SizedBox(width: 4),
                             Text(
                               '$puntos',
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             const SizedBox(width: 16),
                           ],
