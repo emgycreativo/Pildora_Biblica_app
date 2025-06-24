@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:share_plus/share_plus.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'app_theme.dart';
 import 'cita_confirmada.dart';
 import 'custom_button.dart';
@@ -65,6 +66,25 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
     ];
     _background = fondos[random.nextInt(fondos.length)];
     _versiculo = versiculos[random.nextInt(versiculos.length)];
+    _checkDailyPoints();
+  }
+
+  Future<void> _checkDailyPoints() async {
+    final prefs = await SharedPreferences.getInstance();
+    final today = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    final lastOpen = prefs.getString('lastOpenDate');
+    final total = prefs.getInt('totalPoints') ?? 0;
+    if (lastOpen != today) {
+      await prefs.setString('lastOpenDate', today);
+      await prefs.setInt('totalPoints', total + 10);
+      if (mounted) {
+        // Mensaje visual cuando se otorgan los puntos
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('¡Ganaste 10 puntos por entrar hoy!')),
+        );
+      }
+      print('¡Ganaste 10 puntos por entrar hoy!');
+    }
   }
 
   void _shareQuote() {
