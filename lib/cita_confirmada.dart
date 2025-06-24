@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'custom_button.dart';
 
 class CitaConfirmada extends StatefulWidget {
@@ -11,6 +12,11 @@ class CitaConfirmada extends StatefulWidget {
 
 class _CitaConfirmadaState extends State<CitaConfirmada> {
   int _selectedIndex = 0;
+
+  Future<int> _getPoints() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('totalPoints') ?? 0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,6 +102,23 @@ class _CitaConfirmadaState extends State<CitaConfirmada> {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   const Spacer(),
+                  FutureBuilder<int>(
+                    future: _getPoints(),
+                    builder: (context, snapshot) {
+                      final puntos = snapshot.data ?? 0;
+                      return Row(
+                        children: [
+                          const Icon(Icons.star, color: Colors.orange),
+                          const SizedBox(width: 4),
+                          Text(
+                            '$puntos',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(width: 16),
+                        ],
+                      );
+                    },
+                  ),
                   IconButton(onPressed: () {}, icon: const Icon(Icons.group)),
                 ],
               ),
