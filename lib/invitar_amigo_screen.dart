@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'custom_button.dart';
-import 'historial_puntos.dart';
+import 'historial_puntos.dart' as puntos;
 
 class InvitarAmigoScreen extends StatefulWidget {
   const InvitarAmigoScreen({super.key});
@@ -30,9 +30,9 @@ class _InvitarAmigoScreenState extends State<InvitarAmigoScreen> {
     final prefs = await SharedPreferences.getInstance();
     final total = prefs.getInt('totalPoints') ?? 0;
     await prefs.setInt('totalPoints', total + 20);
-    eventosPuntosGlobal.insert(
+    puntos.eventosPuntosGlobal.insert(
       0,
-      EventoPuntos(
+      puntos.EventoPuntos(
         descripcion: 'Compartió la app',
         puntos: 20,
         fecha: DateTime.now(),
