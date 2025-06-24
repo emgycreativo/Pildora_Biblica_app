@@ -169,7 +169,9 @@ class _CitaConfirmadaState extends State<CitaConfirmada> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        onTap: (i) => setState(() => _selectedIndex = i),
+        onTap: (i) {
+          setState(() => _selectedIndex = i);
+        },
         selectedItemColor: Colors.orange,
         unselectedItemColor: Colors.grey,
         items: const [
