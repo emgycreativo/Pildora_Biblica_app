@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'custom_button.dart';
+import 'historial_puntos.dart';
 
 class CitaConfirmada extends StatefulWidget {
   const CitaConfirmada({super.key});
@@ -102,22 +103,32 @@ class _CitaConfirmadaState extends State<CitaConfirmada> {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   const Spacer(),
-                  FutureBuilder<int>(
-                    future: _getPoints(),
-                    builder: (context, snapshot) {
-                      final puntos = snapshot.data ?? 0;
-                      return Row(
-                        children: [
-                          const Icon(Icons.star, color: Colors.orange),
-                          const SizedBox(width: 4),
-                          Text(
-                            '$puntos',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(width: 16),
-                        ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const HistorialPuntosScreen(),
+                        ),
                       );
                     },
+                    child: FutureBuilder<int>(
+                      future: _getPoints(),
+                      builder: (context, snapshot) {
+                        final puntos = snapshot.data ?? 0;
+                        return Row(
+                          children: [
+                            const Icon(Icons.star, color: Colors.orange),
+                            const SizedBox(width: 4),
+                            Text(
+                              '$puntos',
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(width: 16),
+                          ],
+                        );
+                      },
+                    ),
                   ),
                   IconButton(onPressed: () {}, icon: const Icon(Icons.group)),
                 ],
