@@ -6,14 +6,15 @@ class EventoPuntos {
   final int puntos;
   final DateTime fecha;
 
-  const EventoPuntos({
+  EventoPuntos({
     required this.descripcion,
     required this.puntos,
     required this.fecha,
   });
 }
 
-final List<EventoPuntos> eventosPuntosGlobal = [
+// ✅ LISTA GLOBAL accesible desde otros archivos
+List<EventoPuntos> eventosPuntosGlobal = [
   EventoPuntos(
     descripcion: 'Entrada diaria',
     puntos: 10,
@@ -32,7 +33,7 @@ final List<EventoPuntos> eventosPuntosGlobal = [
 ];
 
 class HistorialPuntosScreen extends StatelessWidget {
-  HistorialPuntosScreen({super.key});
+  const HistorialPuntosScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +43,10 @@ class HistorialPuntosScreen extends StatelessWidget {
         itemCount: eventosPuntosGlobal.length,
         itemBuilder: (context, index) {
           final evento = eventosPuntosGlobal[index];
-          final fecha = DateFormat('dd MMM yyyy', 'es_ES')
-              .format(evento.fecha)
-              .toUpperCase();
+          final fecha = DateFormat(
+            'dd MMM yyyy',
+            'es_ES',
+          ).format(evento.fecha).toUpperCase();
           return ListTile(
             leading: const Icon(Icons.star, color: Colors.orange),
             title: Text(evento.descripcion),

@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'custom_button.dart';
 import 'historial_puntos.dart' as puntos;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class InvitarAmigoScreen extends StatefulWidget {
   const InvitarAmigoScreen({super.key});
@@ -42,7 +43,8 @@ class _InvitarAmigoScreenState extends State<InvitarAmigoScreen> {
 
   Future<void> _compartirWhatsApp(String mensaje) async {
     final url = Uri.parse(
-        'https://wa.me/${_telefonoCtrl.text}?text=${Uri.encodeComponent(mensaje)}');
+      'https://wa.me/${_telefonoCtrl.text}?text=${Uri.encodeComponent(mensaje)}',
+    );
     if (await canLaunchUrl(url)) {
       await launchUrl(url, mode: LaunchMode.externalApplication);
       await _sumarPuntos();
@@ -52,7 +54,9 @@ class _InvitarAmigoScreenState extends State<InvitarAmigoScreen> {
   }
 
   Future<void> _compartirSms(String mensaje) async {
-    final url = Uri.parse('sms:${_telefonoCtrl.text}?body=${Uri.encodeComponent(mensaje)}');
+    final url = Uri.parse(
+      'sms:${_telefonoCtrl.text}?body=${Uri.encodeComponent(mensaje)}',
+    );
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
       await _sumarPuntos();
@@ -63,7 +67,9 @@ class _InvitarAmigoScreenState extends State<InvitarAmigoScreen> {
 
   Future<void> _compartirCorreo(String mensaje) async {
     final correo = _correoCtrl.text;
-    final url = Uri.parse('mailto:$correo?subject=Invitaci%C3%B3n&body=${Uri.encodeComponent(mensaje)}');
+    final url = Uri.parse(
+      'mailto:$correo?subject=Invitaci%C3%B3n&body=${Uri.encodeComponent(mensaje)}',
+    );
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
       await _sumarPuntos();
@@ -87,7 +93,10 @@ class _InvitarAmigoScreenState extends State<InvitarAmigoScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                leading: const Icon(Icons.whatsapp, color: Colors.green),
+                leading: const FaIcon(
+                  FontAwesomeIcons.whatsapp,
+                  color: Colors.green,
+                ),
                 title: const Text('WhatsApp'),
                 onTap: () {
                   Navigator.pop(context);
@@ -137,14 +146,18 @@ class _InvitarAmigoScreenState extends State<InvitarAmigoScreen> {
             children: [
               TextFormField(
                 controller: _nombreCtrl,
-                decoration: const InputDecoration(labelText: 'Nombre del amigo'),
+                decoration: const InputDecoration(
+                  labelText: 'Nombre del amigo',
+                ),
                 validator: (value) =>
                     value == null || value.isEmpty ? 'Campo obligatorio' : null,
               ),
               const SizedBox(height: 12),
               TextFormField(
                 controller: _telefonoCtrl,
-                decoration: const InputDecoration(labelText: 'Número de celular'),
+                decoration: const InputDecoration(
+                  labelText: 'Número de celular',
+                ),
                 keyboardType: TextInputType.phone,
                 validator: (value) =>
                     value == null || value.isEmpty ? 'Campo obligatorio' : null,
@@ -152,7 +165,9 @@ class _InvitarAmigoScreenState extends State<InvitarAmigoScreen> {
               const SizedBox(height: 12),
               TextFormField(
                 controller: _correoCtrl,
-                decoration: const InputDecoration(labelText: 'Correo electrónico (opcional)'),
+                decoration: const InputDecoration(
+                  labelText: 'Correo electrónico (opcional)',
+                ),
                 keyboardType: TextInputType.emailAddress,
               ),
               const SizedBox(height: 24),
