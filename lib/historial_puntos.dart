@@ -16,21 +16,21 @@ class EventoPuntos {
 class HistorialPuntosScreen extends StatelessWidget {
   const HistorialPuntosScreen({super.key});
 
-  final List<EventoPuntos> _eventos = const [
+  final List<EventoPuntos> _eventos = [
     EventoPuntos(
       descripcion: 'Entrada diaria',
       puntos: 10,
-      fecha: const DateTime(2025, 6, 23),
+      fecha: DateTime(2025, 6, 23),
     ),
     EventoPuntos(
       descripcion: 'Compartió la app',
       puntos: 20,
-      fecha: const DateTime(2025, 6, 22),
+      fecha: DateTime(2025, 6, 22),
     ),
     EventoPuntos(
       descripcion: 'Leyó el devocional',
       puntos: 15,
-      fecha: const DateTime(2025, 6, 21),
+      fecha: DateTime(2025, 6, 21),
     ),
   ];
 
