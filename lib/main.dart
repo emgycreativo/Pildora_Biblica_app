@@ -188,16 +188,19 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
             child: AnimatedSwitcher(
               duration: const Duration(milliseconds: 500),
               transitionBuilder: (child, animation) {
-                return SlideTransition(
-                  position: Tween<Offset>(
-                    begin: const Offset(0, 1),
-                    end: Offset.zero,
-                  ).animate(animation),
-                  child: child,
-                );
+                if (child.key == const ValueKey('bienvenida') && _mostrarDevocional) {
+                  return SlideTransition(
+                    position: Tween<Offset>(
+                      begin: Offset.zero,
+                      end: const Offset(0, 1),
+                    ).animate(animation),
+                    child: child,
+                  );
+                }
+                return child;
               },
               child: _mostrarDevocional
-                  ? const CitaConfirmada()
+                  ? const CitaConfirmada(key: ValueKey('citaConfirmada'))
                   : _buildBienvenidaView(),
             ),
           ),
