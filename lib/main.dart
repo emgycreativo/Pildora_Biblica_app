@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'app_theme.dart';
 import 'cita_confirmada.dart';
 import 'custom_button.dart';
+import 'registro_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'Píldora Bíblica',
       debugShowCheckedModeBanner: false,
       theme: buildAppTheme(),
-      home: const PantallaBienvenida(),
+      home: const RegistroScreen(),
     );
   }
 }
