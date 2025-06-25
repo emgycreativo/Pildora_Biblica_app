@@ -48,6 +48,12 @@ class _InvitarAmigoScreenState extends State<InvitarAmigoScreen> {
     if (await canLaunchUrl(url)) {
       await launchUrl(url, mode: LaunchMode.externalApplication);
       await _sumarPuntos();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('¡Gracias por compartir! +20 puntos'),
+          duration: Duration(seconds: 2),
+        ),
+      );
     } else {
       _mostrarError();
     }
@@ -60,6 +66,12 @@ class _InvitarAmigoScreenState extends State<InvitarAmigoScreen> {
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
       await _sumarPuntos();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('¡Gracias por compartir! +20 puntos'),
+          duration: Duration(seconds: 2),
+        ),
+      );
     } else {
       _mostrarError();
     }
@@ -73,6 +85,12 @@ class _InvitarAmigoScreenState extends State<InvitarAmigoScreen> {
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
       await _sumarPuntos();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('¡Gracias por compartir! +20 puntos'),
+          duration: Duration(seconds: 2),
+        ),
+      );
     } else {
       _mostrarError();
     }
