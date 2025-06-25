@@ -189,11 +189,15 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
               duration: const Duration(milliseconds: 500),
               transitionBuilder: (child, animation) {
                 if (child.key == const ValueKey('bienvenida') && _mostrarDevocional) {
+                  final curved = CurvedAnimation(
+                    parent: animation,
+                    curve: Curves.easeInOut,
+                  );
                   return SlideTransition(
                     position: Tween<Offset>(
                       begin: Offset.zero,
                       end: const Offset(0, 1),
-                    ).animate(animation),
+                    ).animate(curved),
                     child: child,
                   );
                 }
