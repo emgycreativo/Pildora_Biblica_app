@@ -35,9 +35,12 @@ class PantallaBienvenida extends StatefulWidget {
   State<PantallaBienvenida> createState() => _PantallaBienvenidaState();
 }
 
-class _PantallaBienvenidaState extends State<PantallaBienvenida> {
+class _PantallaBienvenidaState extends State<PantallaBienvenida>
+    with SingleTickerProviderStateMixin {
   bool _isFavorite = false;
-  bool _mostrarDevocional = false;
+  bool _overlayDismissed = false;
+  late final AnimationController _controller;
+  late final Animation<Offset> _slideAnimation;
   late final String _background;
   late final Map<String, String> _versiculo;
 
@@ -67,6 +70,14 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
     ];
     _background = fondos[random.nextInt(fondos.length)];
     _versiculo = versiculos[random.nextInt(versiculos.length)];
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+    _slideAnimation = Tween<Offset>(
+      begin: Offset.zero,
+      end: const Offset(0, 1),
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
     _checkDailyPoints();
   }
 
@@ -90,6 +101,14 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
 
   void _shareQuote() {
     Share.share('"${_versiculo['texto']}"\n${_versiculo['cita']}');
+  }
+
+  void _dismissOverlay() {
+    _controller.forward().then((_) {
+      if (mounted) {
+        setState(() => _overlayDismissed = true);
+      }
+    });
   }
 
 
@@ -160,11 +179,7 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
 
         // Texto "Toca aquí para concluir"
         TextButton(
-          onPressed: () {
-            setState(() {
-              _mostrarDevocional = true;
-            });
-          },
+          onPressed: _dismissOverlay,
           child: const Text(
             'TOCA AQUÍ PARA CONCLUIR',
             style: TextStyle(color: Colors.white),
@@ -176,6 +191,11 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
     );
   }
 
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -184,30 +204,14 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida> {
         fit: StackFit.expand,
         children: [
           Image.asset(_background, fit: BoxFit.cover),
-          SafeArea(
-            child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 500),
-              transitionBuilder: (child, animation) {
-                if (child.key == const ValueKey('bienvenida') && _mostrarDevocional) {
-                  final curved = CurvedAnimation(
-                    parent: animation,
-                    curve: Curves.easeInOut,
-                  );
-                  return SlideTransition(
-                    position: Tween<Offset>(
-                      begin: Offset.zero,
-                      end: const Offset(0, 1),
-                    ).animate(curved),
-                    child: child,
-                  );
-                }
-                return child;
-              },
-              child: _mostrarDevocional
-                  ? const CitaConfirmada(key: ValueKey('citaConfirmada'))
-                  : _buildBienvenidaView(),
+          const SafeArea(child: CitaConfirmada()),
+          if (!_overlayDismissed)
+            SafeArea(
+              child: SlideTransition(
+                position: _slideAnimation,
+                child: _buildBienvenidaView(),
+              ),
             ),
-          ),
         ],
       ),
     );
