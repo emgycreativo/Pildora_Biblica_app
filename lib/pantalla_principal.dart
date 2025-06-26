@@ -5,14 +5,14 @@ import 'custom_button.dart';
 import 'historial_puntos.dart';
 import 'invitar_amigo_screen.dart';
 
-class CitaConfirmada extends StatefulWidget {
-  const CitaConfirmada({super.key});
+class PantallaPrincipal extends StatefulWidget {
+  const PantallaPrincipal({super.key});
 
   @override
-  State<CitaConfirmada> createState() => _CitaConfirmadaState();
+  State<PantallaPrincipal> createState() => _PantallaPrincipalState();
 }
 
-class _CitaConfirmadaState extends State<CitaConfirmada> {
+class _PantallaPrincipalState extends State<PantallaPrincipal> {
   int _selectedIndex = 0;
 
   Future<int> _getPoints() async {

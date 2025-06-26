@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'app_theme.dart';
-import 'cita_confirmada.dart';
+import 'pantalla_principal.dart';
 import 'custom_button.dart';
 import 'registro_screen.dart';
 
@@ -204,12 +204,15 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida>
         fit: StackFit.expand,
         children: [
           Image.asset(_background, fit: BoxFit.cover),
-          const SafeArea(child: CitaConfirmada()),
+          const SafeArea(child: PantallaPrincipal()),
           if (!_overlayDismissed)
-            SafeArea(
-              child: SlideTransition(
-                position: _slideAnimation,
-                child: _buildBienvenidaView(),
+            SlideTransition(
+              position: _slideAnimation,
+              child: Container(
+                color: Colors.black54,
+                width: double.infinity,
+                height: double.infinity,
+                child: SafeArea(child: _buildBienvenidaView()),
               ),
             ),
         ],
