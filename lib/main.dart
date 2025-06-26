@@ -80,6 +80,8 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida>
       begin: Offset.zero,
       end: const Offset(0, 1),
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+    precacheImage(AssetImage(_background), context);
+    precacheImage(AssetImage(_overlayBackground), context);
     _checkDailyPoints();
   }
 
@@ -206,7 +208,8 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida>
         fit: StackFit.expand,
         children: [
           Image.asset(_background, fit: BoxFit.cover),
-          const SafeArea(child: PantallaPrincipal()),
+          if (_overlayDismissed)
+            const SafeArea(child: PantallaPrincipal()),
           if (!_overlayDismissed)
             SlideTransition(
               position: _slideAnimation,
@@ -214,6 +217,7 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida>
                 width: double.infinity,
                 height: double.infinity,
                 decoration: BoxDecoration(
+                  color: Colors.black,
                   image: DecorationImage(
                     image: AssetImage(_overlayBackground),
                     fit: BoxFit.cover,
