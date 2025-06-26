@@ -42,6 +42,7 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida>
   late final AnimationController _controller;
   late final Animation<Offset> _slideAnimation;
   late final String _background;
+  late final String _overlayBackground;
   late final Map<String, String> _versiculo;
 
   @override
@@ -69,6 +70,7 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida>
       },
     ];
     _background = fondos[random.nextInt(fondos.length)];
+    _overlayBackground = fondos[random.nextInt(fondos.length)];
     _versiculo = versiculos[random.nextInt(versiculos.length)];
     _controller = AnimationController(
       vsync: this,
@@ -209,9 +211,14 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida>
             SlideTransition(
               position: _slideAnimation,
               child: Container(
-                color: Colors.black54,
                 width: double.infinity,
                 height: double.infinity,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(_overlayBackground),
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 child: SafeArea(child: _buildBienvenidaView()),
               ),
             ),
