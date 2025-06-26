@@ -80,6 +80,11 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida>
       begin: Offset.zero,
       end: const Offset(0, 1),
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     precacheImage(AssetImage(_background), context);
     precacheImage(AssetImage(_overlayBackground), context);
     _checkDailyPoints();
