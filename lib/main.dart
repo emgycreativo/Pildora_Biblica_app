@@ -113,11 +113,9 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida>
   }
 
   void _dismissOverlay() {
-    _controller.forward().then((_) {
-      if (mounted) {
-        setState(() => _overlayDismissed = true);
-      }
-    });
+    // Show the main screen immediately and animate the overlay out
+    setState(() => _overlayDismissed = true);
+    _controller.forward();
   }
 
 
@@ -215,7 +213,7 @@ class _PantallaBienvenidaState extends State<PantallaBienvenida>
           Image.asset(_background, fit: BoxFit.cover),
           if (_overlayDismissed)
             const SafeArea(child: PantallaPrincipal()),
-          if (!_overlayDismissed)
+          if (!_controller.isCompleted)
             SlideTransition(
               position: _slideAnimation,
               child: Container(
