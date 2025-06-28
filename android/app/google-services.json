@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "472851547628",
+    "project_id": "pildorabiblicaapp",
+    "storage_bucket": "pildorabiblicaapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:472851547628:android:1b55fe21731f8c3752ecc9",
+        "android_client_info": {
+          "package_name": "com.pildorabiblica.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxmDUc-cdOsS50dTt38zKD9HpGc2XqSjM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
