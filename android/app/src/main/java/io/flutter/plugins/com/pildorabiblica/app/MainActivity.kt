@@ -1,4 +1,4 @@
-package com.example.pildora_biblica_app
+package com.pildorabiblica.app
 
 import io.flutter.embedding.android.FlutterActivity
 
