@@ -10,11 +10,15 @@ class RegistroScreen extends StatefulWidget {
 }
 
 class _RegistroScreenState extends State<RegistroScreen> {
+  final _nombreCtrl = TextEditingController();
+  final _apellidoCtrl = TextEditingController();
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
 
   @override
   void dispose() {
+    _nombreCtrl.dispose();
+    _apellidoCtrl.dispose();
     _emailCtrl.dispose();
     _passwordCtrl.dispose();
     super.dispose();
@@ -60,16 +64,27 @@ class _RegistroScreenState extends State<RegistroScreen> {
           children: [
             const SizedBox(height: 24),
             const Text(
-              'Bienvenido a Píldora Bíblica',
+              'Crea tu cuenta',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 12),
-            const Text(
-              'Únete a nuestra comunidad de fe e inspiración. Regístrate o inicia sesión para acceder a los devocionales diarios.',
-              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 24),
+            TextField(
+              controller: _nombreCtrl,
+              decoration: const InputDecoration(
+                labelText: 'Nombre',
+                filled: true,
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: _apellidoCtrl,
+              decoration: const InputDecoration(
+                labelText: 'Apellido',
+                filled: true,
+              ),
+            ),
+            const SizedBox(height: 12),
             TextField(
               controller: _emailCtrl,
               decoration: const InputDecoration(
@@ -89,6 +104,9 @@ class _RegistroScreenState extends State<RegistroScreen> {
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: _registrarse,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF4798ea),
+              ),
               child: const Text('Registrarse'),
             ),
             const SizedBox(height: 16),
@@ -118,6 +136,32 @@ class _RegistroScreenState extends State<RegistroScreen> {
                       foregroundColor: Colors.black,
                     ),
                     child: const Text('Facebook'),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey,
+                      foregroundColor: Colors.black,
+                    ),
+                    child: const Text('Apple'),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey,
+                      foregroundColor: Colors.black,
+                    ),
+                    child: const Text('Correo'),
                   ),
                 ),
               ],
