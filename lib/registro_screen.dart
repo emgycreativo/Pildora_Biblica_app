@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'main.dart';
+import 'login_screen.dart';
 
 class RegistroScreen extends StatefulWidget {
   const RegistroScreen({super.key});
@@ -168,7 +169,12 @@ class _RegistroScreenState extends State<RegistroScreen> {
             ),
             const SizedBox(height: 24),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const LoginScreen()),
+                );
+              },
               child: const Text('¿Ya tienes una cuenta? Inicia sesión'),
             ),
           ],
