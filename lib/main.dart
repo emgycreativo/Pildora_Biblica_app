@@ -4,13 +4,20 @@ import 'package:share_plus/share_plus.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'app_theme.dart';
 import 'pantalla_principal.dart';
 import 'custom_button.dart';
 import 'registro_screen.dart';
+import 'login_screen.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await initializeDateFormatting('es_ES', null);
   runApp(const MyApp());
 }
@@ -23,7 +30,9 @@ class MyApp extends StatelessWidget {
       title: 'Píldora Bíblica',
       debugShowCheckedModeBanner: false,
       theme: buildAppTheme(),
-      home: const RegistroScreen(),
+      home: FirebaseAuth.instance.currentUser == null
+          ? const LoginScreen()
+          : const PantallaBienvenida(),
     );
   }
 }
